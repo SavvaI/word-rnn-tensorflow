@@ -39,6 +39,7 @@ class TextLoader():
         string = re.sub(r"\'d", " \'d", string)
         string = re.sub(r"\'ll", " \'ll", string)
         string = re.sub(r",", " , ", string)
+        string = re.sub(r".", " . ", string)
         string = re.sub(r"!", " ! ", string)
         string = re.sub(r"\(", " \( ", string)
         string = re.sub(r"\)", " \) ", string)
@@ -66,7 +67,7 @@ class TextLoader():
             data = f.read()
 
         # Optional text cleaning or make them lower case, etc.
-        #data = self.clean_str(data)
+        data = self.clean_str(data)
         x_text = data.split()
 
         self.vocab, self.words = self.build_vocab(x_text)
