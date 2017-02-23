@@ -80,7 +80,7 @@ class TextLoader():
 
         # Optional text cleaning or make them lower case, etc.
         data = self.clean_str(data)
-        print(self.split_to_sentences(data)[:200])
+        print(self.split_to_sentences(data)[1000:1500])
         x_text = data.split()
 
         self.vocab, self.words = self.build_vocab(x_text)
