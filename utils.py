@@ -32,11 +32,12 @@ class TextLoader():
         """
         output = ""
         for i in string.split("."):
-            print(i)
-            if len(i) < self.seq_length:
-                output += i + " . " * (self.seq_length - len(i))
+            if len(i.split()) < self.seq_length:
+                j = i + " . " * (self.seq_length - len(i.split()))
             else:
-                output += i[:self.seq_length]
+                j = " ".join(i.split()[:self.seq_length])
+            output += j
+            print(j)
         return output
 
     def clean_str(self, string):
@@ -44,7 +45,7 @@ class TextLoader():
         Tokenization/string cleaning for all datasets except for SST.
         Original taken from https://github.com/yoonkim/CNN_sentence/blob/master/process_data
         """
-        string = re.sub(r"[^가-힣A-Za-z0-9(),!?\'\`]", " ", string)
+        string = re.sub(r"[^가-힣A-Za-z0-9(),!?\.\'\`]", " ", string)
         string = re.sub(r"\'s", " \'s", string)
         string = re.sub(r"\'ve", " \'ve", string)
         string = re.sub(r"n\'t", " n\'t", string)
@@ -52,11 +53,11 @@ class TextLoader():
         string = re.sub(r"\'d", " \'d", string)
         string = re.sub(r"\'ll", " \'ll", string)
         string = re.sub(r",", " , ", string)
-        string = re.sub(r".", " . ", string)
-        string = re.sub(r"!", " ! ", string)
+        string = re.sub(r"\.", " . ", string)
+        string = re.sub(r"!", " . ", string)
         string = re.sub(r"\(", " \( ", string)
         string = re.sub(r"\)", " \) ", string)
-        string = re.sub(r"\?", " \? ", string)
+        string = re.sub(r"\?", " . ", string)
         string = re.sub(r"\s{2,}", " ", string)
         return string.strip().lower()
 

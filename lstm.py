@@ -43,7 +43,6 @@ tf.scalar_summary("loss", loss)
 magnitude = tf.sqrt(tf.reduce_sum(tf.square(dec_memory[1])))
 tf.scalar_summary("magnitude at t=1", magnitude)
 summary_op = tf.merge_all_summaries()
-
 learning_rate = 0.05
 momentum = 0.9
 optimizer = tf.train.MomentumOptimizer(learning_rate, momentum)
