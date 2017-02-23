@@ -26,6 +26,18 @@ class TextLoader():
         self.create_batches()
         self.reset_batch_pointer()
 
+    def split_to_sentences(self, string):
+        """
+        Splits text into separate sentences with length seq_length
+        """
+        output = ""
+        for i in string.split("."):
+            if len(i) < self.seq_length:
+                output += i + " . " * (self.seq_length - len(i))
+            else:
+                output += i[:self.seq_length]
+        return output
+
     def clean_str(self, string):
         """
         Tokenization/string cleaning for all datasets except for SST.
@@ -68,6 +80,7 @@ class TextLoader():
 
         # Optional text cleaning or make them lower case, etc.
         data = self.clean_str(data)
+        print(self.split_to_sentences(data)[:200])
         x_text = data.split()
 
         self.vocab, self.words = self.build_vocab(x_text)
