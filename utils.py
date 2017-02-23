@@ -32,6 +32,7 @@ class TextLoader():
         """
         output = ""
         for i in string.split("."):
+            print(i)
             if len(i) < self.seq_length:
                 output += i + " . " * (self.seq_length - len(i))
             else:
